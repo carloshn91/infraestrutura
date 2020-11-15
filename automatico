@@ -1,0 +1,58 @@
+#!/bin/sh
+
+NAME="infraestrutura"
+TAG=$(date +"%Y%m%d%H%M%S")
+IMAGE="docker.io/carloshn91/${NAME}:${TAG}"
+LATEST="docker.io/carloshn91/${NAME}:latest"
+MINIIP=$(minikube ip)
+SERVICO=$(kubectl get services | awk '{print $5}' | sed 's/5000://g' | sed 's/\/TCP//g' | sed '1d')
+
+# Troca para o cluster minikube
+kubectl config use-context minikube
+
+# Criação do namespace infraestrutura
+kubectl create namespace infraestrutura
+
+# Construção da imagem atualizada
+docker build -t ${IMAGE} .
+
+# Imagem "Tagueada" para envio da imagem
+docker tag ${IMAGE} ${LATEST}
+
+# Push da versão criada pelo build
+docker push ${LATEST}
+echo "Created and pushed ${LATEST}"
+
+# Criação do Deployment
+kubectl create -f deployment.yaml
+echo -e "deployment ${NAME}"
+
+# Criação do Service
+kubectl create -f service.yaml
+echo -e "service ${NAME}"
+# Pular Linha
+echo ""
+
+echo "Aguarde uns segundos"
+sleep 15
+
+echo ""
+
+echo "Utilize os Endereços abaixo para realização de testes"
+# Pular Linha
+echo ""
+
+# Endereço do APP
+echo "* APP http://${MINIIP}:${SERVICO}/app"
+# Pular Linha
+echo ""
+
+# Endereço do ADMIN
+echo "* ADMIN http://${MINIIP}:${SERVICO}/admin"
+# Pular Linha
+echo ""
+
+# Endereço do HEALTHZ
+echo "* HEALTHZ http://${MINIIP}:${SERVICO}/healthz"
+# Pular Linha
+echo ""
