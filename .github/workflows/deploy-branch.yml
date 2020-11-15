@@ -1,0 +1,38 @@
+---
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    # Name the Job
+    name: Deploy Image Infraestrutura
+    # Set the agent to run on
+    runs-on: alpine
+    # Only run this on the main repo
+    if: github.repository == 'github/super-linter'
+    ##################
+    # Load all steps #
+    ##################
+    steps:
+      ##########################
+      # Checkout the code base #
+      ##########################
+      - name: Checkout Code
+        uses: actions/checkout@v2.3.4
+
+      #####################
+      # Run Deploy script #
+      #####################
+      - name: Deploy latest image to DockerHub
+        env:
+          # Set the Env Vars
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          IMAGE_REPO: docker.io/carloshn91/infraestrutura
+          IMAGE_VERSION: latest
+          DOCKERFILE_PATH: Dockerfile
+          REGISTRY: Docker
+        shell: sh
+        run: .automation/upload-docker.sh
