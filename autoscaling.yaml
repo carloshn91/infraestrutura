@@ -1,0 +1,14 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: infraestrutura-k8s
+  namespace: infraestrutura
+spec:
+  maxReplicas: 11
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: v1
+    kind: Deployment
+    name: infraestrutura-k8s
+    targetCPUUtilizationPercentage: 70
+

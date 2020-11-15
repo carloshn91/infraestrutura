@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: infraestrutura-k8s
+  name: infraestrutura-k8s
+spec:
+  replicas: 8
+  revisionHistoryLimit: 11
+  selector:
+    matchLabels:
+      app: infraestrutura-k8s
+  strategy:
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 5
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: infraestrutura-k8s
+    spec:
+      containers:
+      - image: carloshn91/infraestrutura:latest
+        imagePullPolicy: IfNotPresent
+        name: infraestrutura-k8s
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 400m
+            memory: 64Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi

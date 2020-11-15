@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: infraestrutura-k8s
+  labels:
+    app: infraestrutura-k8s
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: infraestrutura-k8s
+  type: NodePort
