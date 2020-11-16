@@ -4,18 +4,22 @@ Conforme orientações de utilização projeto, segue orientações para utiliza
 
 Os seguintes serviços foram utilizados:
 
-Minikube;
-GitHub;
-GitHub Actions;
+Minikube
+
+GitHub
+
+GitHub Actions
 
 Ambientes testados:
 
 MacOS Catalina 10.15.7
+
 Ubuntu 20.04
 
 Repositorios:
 
 DockerHub: https://hub.docker.com/repository/docker/carloshn91/infraestrutura (Público)
+
 GitHub: https://github.com/carloshn91/infraestrutura (Público)
 
 Seguem etapadas concluidas:
