@@ -21,8 +21,8 @@ jobs:
         name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=docker.io/carloshn91/infraestrutura:latest
-          VERSION=edge
+          DOCKER_IMAGE=docker.io/carloshn91/infraestrutura
+          VERSION=latest
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
           fi
