@@ -37,7 +37,7 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
-          driver-opts: image=moby/buildkit:main
+          driver-opts: image=moby/buildkit:master
       -
         name: Login to GitHub Container Registry
         if: github.event_name != 'pull_request'
@@ -83,7 +83,7 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
-          driver-opts: image=moby/buildkit:main
+          driver-opts: image=moby/buildkit:master
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
