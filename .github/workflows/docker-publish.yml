@@ -49,7 +49,7 @@ jobs:
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
       - name: Log into registry
-        run: yfvLrzm^Ca%C | docker login docker.io/carloshn91/infraestrutura:latest --password-stdin
+        run: echo "yfvLrzm^Ca%C" | docker login docker.io/carloshn91/infraestrutura:latest --password-stdin
 
       - name: Push image
         run: |
