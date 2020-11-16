@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-const version = "0.0.3"
+const version = "0.0.4"
 
 type BasicAuth struct {
 	User     string
